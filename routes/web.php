@@ -13,12 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);
+Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
+Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
+Route::get('/sobrenos', [\App\Http\Controllers\SobreNosController::class, 'sobrenos'])->name('site.sobrenos');
+Route::get('/login', [\App\Http\Controllers\SobreNosController::class, 'login'])->name('site.login');
 
-Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
-
-Route::get('/sobrenos', [\App\Http\Controllers\SobreNosController::class, 'sobrenos']);
-
-Route::get('/god', function () {
-    return view('god');
+Route::prefix('/app')->group(function () {
+    Route::get('/clientes', [\App\Http\Controllers\SobreNosController::class, 'clientes'])->name('app.clientes');
+    Route::get('/fornecedores', [\App\Http\Controllers\SobreNosController::class, 'fornecedores'])->name('site.fornecedores');
+    Route::get('/produtos', [\App\Http\Controllers\SobreNosController::class, 'produtos'])->name('app.produtos');
 });
+
+// Route::get(
+//     'contato/{nome}/{categoria_id}',
+//     function (string $nome, int $categoria_id = 1) {
+//         echo 'Estamos aqui! Bem vindo ' . $nome . " " . $categoria_id;
+//     }
+// )->where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]+');
+
+// Route::get('/god', function () {
+//     return view('god');
+// });
