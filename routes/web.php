@@ -24,7 +24,14 @@ Route::prefix('/app')->group(function () {
     Route::get('/produtos', [\App\Http\Controllers\SobreNosController::class, 'produtos'])->name('app.produtos');
 });
 
-// Route::get(
+Route::get('teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])->name('teste');
+
+// Route::redirect('/rota2', '/rota1');
+// Route::get('rota2', function () { 
+//     return redirect()->route('site.rota1');
+// })->name('site.rota2');
+
+// Route::get(/
 //     'contato/{nome}/{categoria_id}',
 //     function (string $nome, int $categoria_id = 1) {
 //         echo 'Estamos aqui! Bem vindo ' . $nome . " " . $categoria_id;
@@ -34,3 +41,7 @@ Route::prefix('/app')->group(function () {
 // Route::get('/god', function () {
 //     return view('god');
 // });
+
+Route::fallback(function (){
+    echo 'Página não encontrada! Por favor, <a href="'.route('site.index').'">clique aqui</a> para ir a página inicial!';
+});
